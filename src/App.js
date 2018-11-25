@@ -17,6 +17,12 @@ class App extends Component {
     })
   }
 
+  reset = () => {
+    this.setState({
+      count: 0
+    })
+  }
+
   render() {
     const { count } = this.state;
     return (
@@ -24,12 +30,15 @@ class App extends Component {
         I'm a React Application
         <hr />
         <button onClick={this.add}>click me to add</button>  
+        <ResetButton onReset={this.reset}/>
         <hr />
         <Box count={count} />
+        
       </div>)
   }
 }
 
 const Box = props => <div>The current number is:{props.count}</div>
+const ResetButton = props => <button onClick={props.onReset}>reset</button>
 
 export default App;
