@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import MockFetchData from './utils/mockFetchData'
 import './App.css';
+
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'Learn React'
+      title: 'Learn React',
+      value: 1
     }
+  }
+
+  componentDidMount() {
+    MockFetchData().then(newValue => {
+      this.setState({
+        value: newValue
+      })
+    })
   }
 
   changeTitle = () => {
@@ -17,7 +28,7 @@ class App extends Component {
   }
 
   render() {
-    const { title } = this.state;
+    const { title, value } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -33,7 +44,7 @@ class App extends Component {
           >
             { title }
           </a>
-          <button onClick={this.changeTitle}>Change Title</button>
+          <h3>RandomValue: {value}</h3>
         </header>
       </div>
     );
