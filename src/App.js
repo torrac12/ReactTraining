@@ -9,19 +9,25 @@ class App extends Component {
       title: 'Learn React'
     }
   }
+
+  changeTitle = () => {
+    this.setState({
+      title: 'I love React!'
+    })
+  }
   render() {
     const { title } = this.state;
     return (
       <div className="App">
         <header className="App-header">
-          <HeaderContent title={title} />
+          <HeaderContent title={title} onClick={this.changeTitle} />
         </header>
       </div>
     );
   }
 }
 
-const HeaderContent = ({title}) => {
+const HeaderContent = ({title, onClick }) => {
   return (
     <div>
       <img src={logo} className="App-logo" alt="logo" />
@@ -36,7 +42,7 @@ const HeaderContent = ({title}) => {
       >
         { title }
       </a>
-    
+      <button onClick={onClick}>change title</button>
     </div>
   )
 }
