@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const otherThings = ['es6', 'redux', 'babel'];  // 1. use map and filter
+// 2. condition render
+// 3. use instance method to render
+
 class App extends Component {
   render() {
     return (
@@ -19,6 +23,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <div>and</div>
         </header>
       </div>
     );
