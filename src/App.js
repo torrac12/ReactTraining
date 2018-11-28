@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import MockFetchData from './utils/mockFetchData'
+import audioDemo from './demo.mp3'
 import './App.css';
 
 
@@ -9,26 +9,24 @@ class App extends Component {
     super(props)
     this.state = {
       title: 'Learn React',
-      value: 1
+      currentTime: 0
     }
   }
 
   componentDidMount() {
-    MockFetchData().then(newValue => {
+    this.audio.addEventListener('timeupdate', () => {
       this.setState({
-        value: newValue
+        currentTime: this.audio.currentTime
       })
     })
   }
 
-  changeTitle = () => {
-    this.setState({
-      title: 'I love React!'
-    })
+  getAudio = (audioNode) => {
+    this.audio = audioNode
   }
 
   render() {
-    const { title, value } = this.state;
+    const { title, currentTime } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -44,7 +42,9 @@ class App extends Component {
           >
             { title }
           </a>
-          <h3>RandomValue: {value}</h3>
+          <div>///</div>
+          <audio ref={this.getAudio} src={audioDemo} controls/>
+          <div>{currentTime}</div>
         </header>
       </div>
     );
