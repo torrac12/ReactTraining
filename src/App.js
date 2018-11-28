@@ -3,7 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: 'Learn React'
+    }
+  }
+
+  changeTitle = () => {
+    this.setState({
+      title: 'I love React!'
+    })
+  }
+
   render() {
+    const { title } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -17,8 +31,9 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            { title }
           </a>
+          <button onClick={this.changeTitle}>Change Title</button>
         </header>
       </div>
     );
