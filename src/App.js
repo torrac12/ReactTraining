@@ -34,31 +34,26 @@ const HeaderContent = ({title, onClick }) => {
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        { title }
-      </a>
-      <button onClick={onClick}>change title</button>
+      <TitleLink title={title} onClick={onClick} />
     </div>
   )
 }
 
+const TitleLink = ({ title, onClick }) => (
+  <a
+    className="App-link"
+    href="https://reactjs.org"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    { title }
+    <button onClick={e => {e.preventDefault(); onClick()}}>change title</button>
+  </a>
+)
+
 export default App;
 
-// const TitleLink = ({ title }) => (
-//   <a
-//     className="App-link"
-//     href="https://reactjs.org"
-//     target="_blank"
-//     rel="noopener noreferrer"
-//   >
-//     { title }
-//   </a>
-// )
+
 
 // const description = 'React is the most popular framework!'
 // const Description = ({ description }) => <p>{description}</p>
