@@ -8,21 +8,22 @@ class App extends Component {
     super(props)
 
     this.state = {
-      width: 0
+      currentTime: 0
     }
   }
 
-  componentDidMount() { // think about it why should do in this lifeCycle
-    this.setState({
-      width: this.node.clientWidth
-    })
-
-    this.audio.play()
-
+  componentDidMount() { 
+    // this.audio.play()
+    this.audio.addEventListener('timeupdate', this.updateTime)
+  }
+  componentWillUnmount() { // why shold we do this
+    this.audio.removeEventListener('timeupdate', this.updateTime)
   }
 
-  getNode = (node) => {
-    this.node = node;
+  updateTime = () => {
+    this.setState({
+      currentTime: this.audio.currentTime
+    })
   }
 
   getAudio = audioNode => {
@@ -30,7 +31,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App" ref={this.getNode} >
+      <div className="App">
         <header className="App-header" >
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -46,6 +47,7 @@ class App extends Component {
           </a>
           <h3>img’s width is {this.state.width}</h3>
           <audio src={demoAudio} controls  ref={this.getAudio}/> 
+          <h3>current play time is: {this.state.currentTime}</h3>
         </header>
       </div>
     );
