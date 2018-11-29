@@ -8,27 +8,24 @@ class App extends Component {
     super(props)
 
     this.state = {
-      width: 0
+      value: 'test'
     }
-  }
-
-  componentDidMount() { // think about it why should do in this lifeCycle
-    this.setState({
-      width: this.node.clientWidth
-    })
-
-    this.audio.play()
-
   }
 
   getNode = (node) => {
     this.node = node;
   }
 
-  getAudio = audioNode => {
-    this.audio = audioNode
+  handleChange = e => {
+    this.setState({
+      value: e.target.value
+    })
   }
+
+  getValues = ()
+
   render() {
+    const { value } = this.state;
     return (
       <div className="App" ref={this.getNode} >
         <header className="App-header" >
@@ -44,9 +41,18 @@ class App extends Component {
           >
             Learn React
           </a>
-          <h3>img’s width is {this.state.width}</h3>
-          <audio src={demoAudio} controls  ref={this.getAudio}/> 
+          <hr />
+          <label>uncontrolled mode</label>
+          <input ref={this.getNode} />
+          <hr />
+          {
+            // 1. use in different situation
+            // 2. think about controlled vs uncontrolled mode in other components(not only form)
+          }
+          <label>controlled mode</label>
+          <input value={value} onChange={this.handleChange} /> 
         </header>
+        <button onClick={this.getValues}>GET VALUES</button>
       </div>
     );
   }
