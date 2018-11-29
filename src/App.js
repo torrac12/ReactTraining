@@ -21,35 +21,35 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <HeaderContent title={title} onClick={this.changeTitle} />
+          <HeaderButton onClick={this.changeTitle} />
         </header>
       </div>
     );
   }
 }
 
-const HeaderContent = ({title, onClick }) => {
+const HeaderContent = ({ title }) => {
   return (
     <div>
       <img src={logo} className="App-logo" alt="logo" />
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-      <TitleLink title={title} onClick={onClick} />
+        <a
+        className="App-link"
+        href="https://reactjs.org"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        { title }
+    </a>
     </div>
   )
 }
 
-const TitleLink = ({ title, onClick }) => (
-  <a
-    className="App-link"
-    href="https://reactjs.org"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    { title }
-    <button onClick={e => {e.preventDefault(); onClick()}}>change title</button>
-  </a>
-)
+const HeaderButton = ({ onClick }) => {
+  return <button onClick={onClick}>change my sibling component</button>
+}
 
 export default App;
 
