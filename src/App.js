@@ -1,25 +1,60 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-class App extends Component {
+
+class Item extends React.Component {
+  state = {
+    text: this.props.text
+  };
+
+  onChange = event => {
+    this.setState({
+      text: event.target.value
+    });
+  };
+
+  componentDidMount() {
+    console.log("Mounted ", this.props.text);
+  }
+
+
+  render() {
+    const { text } = this.state;
+    return (
+      <li>
+        <input value={text} onChange={this.onChange} />
+      </li>
+    );
+  }
+}
+
+class App extends React.Component {
+  state = {
+    items: [
+      {
+        text: "First",
+        id: 1
+      },
+      {
+        text: "Second",
+        id: 2
+      }
+    ]
+  };
+
+  addItem = () => {
+    const items = [{ text: "Front", id: Date.now() }, ...this.state.items];
+    this.setState({ items });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <ul>
+          {this.state.items.map((item, index) => (
+            <Item {...item} key={item.id} />
+          ))}
+        </ul>
+        <button onClick={this.addItem}>Add Item</button>
       </div>
     );
   }
