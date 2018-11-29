@@ -2,11 +2,36 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const otherThings = ['es6', 'redux', 'babel'];  // 1. use map and filter
-
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      status: 0
+    }
+  }
+
+  renderContent() {
+    return (
+      <div>
+        maybe there is a lot of content,
+        <div>
+          and the structure is very complex,
+          <div>or there logic is  independent,</div>
+          <div>we can extract to a function,</div>
+        </div>
+      </div>
+    )
+  }
   render() {
+    const { status } = this.state;
+    let title;
+    if (status) {
+      title = 'Learn React!'
+    } else {
+      title = 'I love react'
+    }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -20,9 +45,12 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            {title}
           </a>
-          <div>and</div>
+          <div style={{color: 'red'}}>
+            { status === 1 && 'there is subtitle placeholder'}
+          </div>
+          { this.renderContent() }
         </header>
       </div>
     );
